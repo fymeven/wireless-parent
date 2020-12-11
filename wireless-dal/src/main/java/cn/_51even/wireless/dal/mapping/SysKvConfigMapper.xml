@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn._51even.wireless.dal.mapper.SysKvConfigMapper" >
+  <resultMap id="BaseResultMap" type="cn._51even.wireless.bean.entity.SysKvConfig" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="config_key" property="configKey" jdbcType="VARCHAR" />
+    <result column="config_value" property="configValue" jdbcType="VARCHAR" />
+    <result column="config_mark" property="configMark" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

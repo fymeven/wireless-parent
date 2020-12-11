@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty name="appName" source="spring.application.name"/>
+
+    <springProperty name="baseLogPath" source="logback.baseLogPath" />
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <jmxConfigurator/>
+
+    <appender name="FILE_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${baseLogPath}/${appName}-running.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${baseLogPath}/%d{yyyy-MM-dd}/${appName}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <springProfile name="test,prod">
+        <root level="INFO">
+            <appender-ref ref="FILE_LOG"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <root level="INFO"/>
+    </springProfile>
+
+</configuration>

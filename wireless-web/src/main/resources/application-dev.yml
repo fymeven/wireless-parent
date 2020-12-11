@@ -1,0 +1,91 @@
+server:
+  port: 8851
+  servlet:
+    session:
+      cookie:
+        name: wireless_jid
+spring:
+  application:
+    name: wireless-web
+  ###################### datasource ######################
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.107.151.224:3306/wireless?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: even
+    password: even@mysql_224
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    max-active: 100
+    initial-size: 5
+    min-idle: 5
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 50
+    max-pool-prepared-statement-per-connection-size: 20
+    connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+#  ###################### redis ######################
+#  redis:
+#    host: 172.16.100.120
+#    database: 0
+#    port: 6379
+#    timeout: 100000
+#    password: chinaoly
+  ###################### zookeeper ######################
+#  cloud:
+#    zookeeper:
+#      connect-string: 172.16.100.136:2181
+  ###################### jackson ######################
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: true
+    time-zone: GMT+8
+###################### actuator ######################
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+###################### swagger ######################
+swagger:
+  enabled: true
+###################### plugin ######################
+plugin:
+  uploadFile:
+  messageMq:
+###################### log ######################
+logging:
+  level:
+    cn._51even.wireless: debug
+  path: ./logs
+###################### logback ######################
+logback:
+  baseLogPath: ./logs
+###################### udp ######################
+udp:
+  #监听端口
+  listenPort: 2021
+  sendPort: 2030
+  #心跳时间(单位：秒)
+  heartBeat: 10
+  #报文秘钥
+  Key: '00194726'
+#security:
+#  oauth2:
+#    client:
+#      client-id: client1
+#      client-secret: even123
+#      access-token-uri: http://localhost:8100/oauth/token
+#      user-authorization-uri: http://localhost:8100/oauth/authorize
+#      pre-established-redirect-uri: http://localhost:8851
+#    resource:
+##      user-info-uri: http://localhost:8100/user
+#      token-info-uri: http://localhost:8100/oauth/check_token
+#    sso:
+#      login-path: /sso/token
